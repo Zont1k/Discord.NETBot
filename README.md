@@ -11,7 +11,7 @@ This repository is a very simple up-to-date template which you can use for your 
 
 ## Config
 
-The template comes with a `appsettings.json` which can be used to provide the prefix and token of your bot.
+The template comes with a `_config.yml` which can be used to provide the prefix and token of your bot.
 
 
 ```
