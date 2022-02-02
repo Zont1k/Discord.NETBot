@@ -3,8 +3,7 @@
 <img src="https://i.imgur.com/yg3BYh4.png" align="right"
      alt="Size Limit logo by Anton Lovchikov" width="120" height="120">
 
-This repository is a very simple up-to-date template which you can use for your own Discord.NET bot. 
-
+The source code of the bot I created Mooni.
 * Support for **logging**;
 * **Advanced** configuration options thanks to Discord.Addons.Hosting;
 
