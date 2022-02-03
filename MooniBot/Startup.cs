@@ -1,4 +1,5 @@
-﻿using Discord.Commands;
+using Discord;
+using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,24 +29,24 @@ namespace MooniBot
             var startup = new Startup(args);
             await startup.RunAsync();
         }
-
         public async Task RunAsync()
         {
-            var services = new ServiceCollection();
+            var services = Configure_Services(Configuration);
 
-            var provider = services.BuildServiceProvider();
-            provider.GetRequiredService<CommandHandler>();
+            services.GetRequiredService<CommandHandler>();
 
-            await provider.GetRequiredService<StartupService>().StartAsync();
+            await services.GetRequiredService<StartupService>().StartAsync();
             await Task.Delay(-1);
         }
 
-        private void ConfigureServices(IServiceCollection services, Type Configuration)
+        private ServiceProvider Configure_Services(IConfiguration Configuration)
         {
-            services.AddSingleton(new DiscordSocketClient(new DiscordSocketConfig
+            return new ServiceCollection()
+            .AddSingleton(new DiscordSocketClient(new DiscordSocketConfig
             {
                 LogLevel = Discord.LogSeverity.Verbose,
-                MessageCacheSize = 1000
+                MessageCacheSize = 1000,
+                GatewayIntents = GatewayIntents.All
             }))
             .AddSingleton(new CommandService(new CommandServiceConfig
             {
@@ -55,7 +56,8 @@ namespace MooniBot
             }))
             .AddSingleton<CommandHandler>()
             .AddSingleton<StartupService>()
-            .AddSingleton(Configuration);
+            .AddSingleton(Configuration)
+            .BuildServiceProvider();
         }
     }
 }
