@@ -14,10 +14,10 @@ The template comes with a `_config.yml` which can be used to provide the prefix 
 
 
 ```
-{
-   "prefix": "!",
-   "token": "token"
-}
+prefix: '!'
+tokens:
+discord: 'your_bot_token'
+
 ```
 
 ## Packages
